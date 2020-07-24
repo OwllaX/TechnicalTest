@@ -307,99 +307,106 @@
     </a>
 </div>
 
-<div class="content" role="main">
+<div class="content" role="main" style="margin-top: 0px;">
 
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1" style="background-color:#1976d2;"><i class="fa fa-search" style="color: #eeeeee;"></i></span>
+  <div class="content">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1" style="background-color:#1976d2;"><i class="fa fa-search" style="color: #eeeeee;"></i></span>
+      </div>
+      <input id="filter" type="text" class="form-control" placeholder="Type here...">
     </div>
-    <input id="filter" type="text" class="form-control" placeholder="Type here...">
-  </div>
-  
-  <table id="customersTable" class="table table-striped table-sm" cellspacing="0" width="100%">
-    <thead>
-      <tr>
-        <th scope="col">Cliente</th>
-        <th scope="col">Compa&ntilde;&iacute;a</th>
-        <th scope="col">Nombre Contacto</th>
-        <th scope="col">T&iacute;tulo Contacto</th>
-        <th scope="col">Pa&iacute;s</th>
-        <th scope="col">Tel&eacute;fono</th>
-        <th scope="col">FAX</th>
-        <th scope="col">Ordenes</th>
-      </tr>
-    </thead>
-    <tbody class="searchable">
-      <tr *ngFor="let x of customers">
-        <th scope="row">{{ x.id }}</th>
-        <td>{{ x.companyName }}</td>
-        <td>{{ x.contactName }}</td>
-        <td>{{ x.contactTitle }}</td>
-        <td>{{ x.country }}</td>
-        <td>{{ x.phone }}</td>
-        <td>{{ x.fax }}</td>
-        <td><a class="btn-primary btn" style="color: #eeeeee;" data-toggle="modal"  attr.data-target='#{{x.id}}'>
-          <i class="fa fa-list-ol" aria-hidden="true"></i>
-        </a></td>
-        <td style="display:ruby-base-container;">
-          <div class="modal fade" id='{{x.id}}' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h3 class="modal-title" id="exampleModalLongTitle">{{x.id + ': ' + x.companyName}}</h3>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div *ngFor='let or of orders'>
-                    <div *ngIf='x.id == or.order.customerId'>
-                      <div class="form-group">
-                        <label for=""><b>Cod. Orden</b></label>
-                        <input class="form-control" type="text" value="{{or.order.id}}" readonly>
-                      </div>
-                      <div class="form-group">
-                        <label for=""><b>Dirreci&oacute;n de Entrega</b></label>
-                        <input class="form-control" type="text" value="{{or.order.shipAddress + ', ' + or.order.shipCountry}}" readonly>
-                      </div>
-                      <div class="form-group">
-                        <label for=""><b>Fecha de Entrega</b></label>
-                        <input class="form-control" type="text" value="{{or.order.requiredDate | date}}" readonly>
-                      </div>
-                      <div class="form-group">
-                        <ul class="list-group" *ngFor="let detail of or.orderDetails">
-                          <li class="list-group-item active"><b>Cod. Producto: </b>{{detail.productId}}</li>
-                          <li class="list-group-item"><b>Precio Unitario: </b>{{detail.unitPrice}}</li>
-                          <li class="list-group-item"><b>Cantidad: </b>{{detail.quantity}}</li>
-                          <li class="list-group-item"><b>Descuento: </b>{{detail.discount}}</li>
-                          <li class="list-group-item"><b>TOTAL: </b>{{(detail.quantity * detail.unitPrice) - ((detail.quantity * detail.unitPrice) * detail.discount)}}</li>
-                        </ul>
+    <table id="customersTable" class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Cliente</th>
+          <th scope="col">Compa&ntilde;&iacute;a</th>
+          <th scope="col">Nombre Contacto</th>
+          <th scope="col">T&iacute;tulo Contacto</th>
+          <th scope="col">Pa&iacute;s</th>
+          <th scope="col">Tel&eacute;fono</th>
+          <th scope="col">FAX</th>
+          <th scope="col">Ordenes</th>
+        </tr>
+      </thead>
+      <tbody class="searchable">
+        <tr *ngFor="let x of customers">
+          <th scope="row">{{ x.id }}</th>
+          <td>{{ x.companyName }}</td>
+          <td>{{ x.contactName }}</td>
+          <td>{{ x.contactTitle }}</td>
+          <td>{{ x.country }}</td>
+          <td>{{ x.phone }}</td>
+          <td>{{ x.fax }}</td>
+          <td><a class="btn-primary btn" style="color: #eeeeee;" data-toggle="modal"  attr.data-target='#{{x.id}}'>
+            <i class="fa fa-list-ol" aria-hidden="true"></i>
+          </a></td>
+          <td style="display:ruby-base-container;">
+            <div class="modal fade" id='{{x.id}}' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle">{{x.id + ': ' + x.companyName}}</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div *ngFor='let or of orders'>
+                      <div *ngIf='x.id == or.order.customerId'>
+                        <div class="form-group">
+                          <label for=""><b>Cod. Orden</b></label>
+                          <input class="form-control" type="text" value="{{or.order.id}}" readonly>
+                        </div>
+                        <div class="form-group">
+                          <label for=""><b>Fecha de Orden</b></label>
+                          <input class="form-control" type="text" value="{{or.order.orderDate | date: 'short'}}" readonly>
+                        </div>
+                        <div class="form-group">
+                          <label for=""><b>Dirreci&oacute;n de Entrega</b></label>
+                          <input class="form-control" type="text" value="{{or.order.shipAddress + ', ' + or.order.shipCountry + ', cod. Postal: ' + or.order.shipPostalCode}}" readonly>
+                        </div>
+                        <div class="form-group">
+                          <label for=""><b>Fecha de Entrega</b></label>
+                          <input class="form-control" type="text" value="{{or.order.requiredDate | date}}" readonly>
+                        </div>
+                        <div class="form-group">
+                          <ul class="list-group" *ngFor="let detail of or.orderDetails">
+                            <li class="list-group-item active"><b>Cod. Producto: </b>{{detail.productId}}</li>
+                            <li class="list-group-item"><b>Precio Unitario: </b>{{detail.unitPrice}}</li>
+                            <li class="list-group-item"><b>Cantidad: </b>{{detail.quantity}}</li>
+                            <li class="list-group-item"><b>Descuento: </b>{{detail.discount}}</li>
+                            <li class="list-group-item"><b>TOTAL: </b>{{(detail.quantity * detail.unitPrice) - ((detail.quantity * detail.unitPrice) * detail.discount)}}</li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot style="border: #24292e;background-color: #333;color: #ffff;;">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Compa&ntilde;&iacute;a</th>
-        <th scope="col">Nombre Contacto</th>
-        <th scope="col">T&iacute;tulo Contacto</th>
-        <th scope="col">Pa&iacute;s</th>
-        <th scope="col">Tel&eacute;fono</th>
-        <th scope="col">FAX</th>
-        <th scope="col">Ordenes</th>
-      </tr>
-    </tfoot>
-  </table>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot style="border: #24292e;background-color: #333;color: #ffff;;">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Compa&ntilde;&iacute;a</th>
+          <th scope="col">Nombre Contacto</th>
+          <th scope="col">T&iacute;tulo Contacto</th>
+          <th scope="col">Pa&iacute;s</th>
+          <th scope="col">Tel&eacute;fono</th>
+          <th scope="col">FAX</th>
+          <th scope="col">Ordenes</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  
+
 
   <!-- Footer -->
   <footer>

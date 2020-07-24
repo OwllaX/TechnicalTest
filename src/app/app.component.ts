@@ -38,6 +38,7 @@ export class AppComponent {
           for(let x in ordersArray[key]) {
             if (x == 'order'){
               ordersArray[key].order.requiredDate = new Date(parseInt(ordersArray[key].order.requiredDate.substr(6)));
+              ordersArray[key].order.orderDate = new Date(parseInt(ordersArray[key].order.orderDate.substr(6)));
             }
           }
           this.orders.push(ordersArray[key]);          
