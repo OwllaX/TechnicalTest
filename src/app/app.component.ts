@@ -19,34 +19,25 @@ export class AppComponent {
   countOrders = 0;
 
   constructor(private http1: HttpClient, private http2: HttpClient) {
+    
     this.http1.get(this.url1).toPromise().then(data => {
+      let customerArray = data['results'];
 
-      for (let key in data['results']) {
-        if (data['results'].hasOwnProperty(key)) {
-          this.countCustomers ++;
+      for (let key in customerArray) {
+        if (customerArray.hasOwnProperty(key)) {
+          this.customers.push(customerArray[key]);
         }
       }
-
-      for (let index = 0; index < this.countCustomers; index++) {
-        this.customers.push(data.results[index]);
-      }
-
-      console.log(this.customers);
     });
 
     this.http2.get(this.url2).toPromise().then(data => {
+      let ordersArray = data['results'];
       
-      for (let key in data['results']) {
-        if (data['results'].hasOwnProperty(key)) {
-          this.countOrders ++;          
+      for (let key in ordersArray) {
+        if (ordersArray.hasOwnProperty(key)) {
+          this.orders.push(ordersArray[key]);          
         }
       }
-
-      for (let index = 0; index < this.countOrders; index++) {
-        this.orders.push(data.results[index]);
-      }
-
-      console.log(this.orders);
     });
   }  
 }
