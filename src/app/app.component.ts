@@ -35,6 +35,11 @@ export class AppComponent {
       
       for (let key in ordersArray) {
         if (ordersArray.hasOwnProperty(key)) {
+          for(let x in ordersArray[key]) {
+            if (x == 'order'){
+              ordersArray[key].order.requiredDate = new Date(parseInt(ordersArray[key].order.requiredDate.substr(6)));
+            }
+          }
           this.orders.push(ordersArray[key]);          
         }
       }
