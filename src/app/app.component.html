@@ -311,10 +311,9 @@
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <a id='searching' class="btn-primary btn form-control" style="color: #eeeeee;" onclick="searching()">Buscar por ...</a>
+      <span class="input-group-text" id="basic-addon1" style="background-color:#1976d2;"><i class="fa fa-search" style="color: #eeeeee;"></i></span>
     </div>
-    <input class="form-control" type="text" id="searchCompany" onkeyup="byCompany()" placeholder="Compa&ntilde;&iacute;a ...">
-    <input class="form-control" type="text" id="searchContact" onkeyup="byContact()" placeholder="Nombre Contacto ..." style="display: none;">
+    <input id="filter" type="text" class="form-control" placeholder="Type here...">
   </div>
   
   <table id="customersTable" class="table table-striped table-sm" cellspacing="0" width="100%">
@@ -330,7 +329,7 @@
         <th scope="col">Ordenes</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="searchable">
       <tr *ngFor="let x of customers">
         <th scope="row">{{ x.id }}</th>
         <td>{{ x.companyName }}</td>
