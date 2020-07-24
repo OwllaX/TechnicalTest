@@ -347,7 +347,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">{{x.id + ': ' + x.companyName}}</h5>
+                  <h3 class="modal-title" id="exampleModalLongTitle">{{x.id + ': ' + x.companyName}}</h3>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -367,13 +367,15 @@
                         <label for=""><b>Fecha de Entrega</b></label>
                         <input class="form-control" type="text" value="{{or.order.requiredDate}}" readonly>
                       </div>
-                      <ul class="list-group" *ngFor="let detail of or.orderDetails">
-                        <li class="list-group-item active"><b>Cod. Producto: </b>{{detail.productId}}</li>
-                        <li class="list-group-item"><b>Precio Unitario: </b>{{detail.unitPrice}}</li>
-                        <li class="list-group-item"><b>Cantidad: </b>{{detail.quantity}}</li>
-                        <li class="list-group-item"><b>Descuento: </b>{{detail.discount}}</li>
-                        <li class="list-group-item"><b>TOTAL: </b>{{(detail.quantity * detail.unitPrice) - ((detail.quantity * detail.unitPrice) * detail.discount)}}</li>
-                      </ul>
+                      <div class="form-group">
+                        <ul class="list-group" *ngFor="let detail of or.orderDetails">
+                          <li class="list-group-item active"><b>Cod. Producto: </b>{{detail.productId}}</li>
+                          <li class="list-group-item"><b>Precio Unitario: </b>{{detail.unitPrice}}</li>
+                          <li class="list-group-item"><b>Cantidad: </b>{{detail.quantity}}</li>
+                          <li class="list-group-item"><b>Descuento: </b>{{detail.discount}}</li>
+                          <li class="list-group-item"><b>TOTAL: </b>{{(detail.quantity * detail.unitPrice) - ((detail.quantity * detail.unitPrice) * detail.discount)}}</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -399,8 +401,6 @@
       </tr>
     </tfoot>
   </table>
-
-  
 
   <!-- Footer -->
   <footer>
